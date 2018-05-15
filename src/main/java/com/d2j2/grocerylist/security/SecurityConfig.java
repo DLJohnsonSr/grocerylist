@@ -33,18 +33,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        String[] everyone = {"/", "/fragment/**"};
+        String[] everyone = {"/", "/css/**","/img/**","/vendor/**","/signup","/saveuser","/login"};
         String[] user = {everyone.toString()};
-        String[] admin = {user.toString(), "/admin/**"};
-        String[] boss = {admin.toString()};
+        String[] sM = {user.toString(),"/admin/**"};
+        String[] dM = {sM.toString()};
+        String[] boss = {dM.toString()};
 
         http.authorizeRequests()
                 .antMatchers(everyone).permitAll()
                 .antMatchers(user).access("hasAuthority('USER')")
-                .antMatchers(admin).access("hasAuthority('ADMIN')")
+                .antMatchers(sM).access("hasAuthority('SM')")
+                .antMatchers(dM).access("hasAuthority('DM')")
                 .antMatchers(boss).access("hasAuthority('BOSS')")
                 .anyRequest().authenticated()
                 .and()
+//                .formLogin().permitAll()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
@@ -58,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.inMemoryAuthentication().withUser("Dom")
-                .password(passwordEncoder().encode("password")).authorities("BOSS")
+                .password(passwordEncoder().encode("password")).authorities("USER","SM","DM","BOSS")
                 .and()
                 .passwordEncoder(passwordEncoder());
 

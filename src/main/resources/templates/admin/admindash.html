@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+
+<head th:replace="/fragment/globaltemp::head">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DollarSaved Grocery List App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/full.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+<!-- Page Content Starts-->
+<!-- Page Content -->
+<div class="container main-section">
+
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h1 class="mt-4">Chain List</h1>
+
+            <table class="table table-striped table-bordered table-hover">
+                <thead >
+                    <tr>
+                        <th scope="col">Chain Name</th>
+                        <th scope="col"># of Stores</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="eachChain:${chains}">
+                        <td th:text="${eachChain.chainName}"></td>
+                        <td></td>
+                        <td>
+                            <a href="/admin/viewchain{id}(id=${eachChain.id})}">Details</a><br>
+                            <a href="/admin/masterlist{id}(id=${eachChain.id})}">View Master Product List</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Add Chain Widget -->
+            <div th:fragment="chain" class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <form th:action="@{/admin/savechain}" th:object="${newChain}" method="post" class="input-group">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="text" class="form-control" placeholder="Add Name of Chain">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="submit">Save</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Grocery Chains</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">Web Design</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Side Widget</h5>
+                <div class="card-body">
+                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+<!-- Page Content Ends-->
+
+
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="/fragment/globaltemp::scripts">
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</div>
+
+</body>
+
+</html>

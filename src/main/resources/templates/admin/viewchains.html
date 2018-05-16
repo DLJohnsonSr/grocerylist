@@ -66,10 +66,15 @@
                 <div class="card-body">
                     <form th:action="@{/admin/savechain}" th:object="${newChain}" method="post" class="input-group">
                         <input type="hidden" th:field="*{id}">
-                        <input type="text" th:field="*{chainName}" class="form-control" placeholder="Add Name of Chain">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="submit">Save</button>
-                        </span>
+                        <div class="form-row ">
+                            <div class="form-group col">
+                                <label for="chainName" class="form-label"></label>
+                                <input type="text" th:field="*{chainName}" id="chainName" class="form-control" placeholder="Chain Name">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="submit">Save</button>
+                                </span>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
-public class AdminController {
+public class CorporateController {
 
     @Autowired
     ChainRepository chainRepository;
@@ -26,31 +26,31 @@ public class AdminController {
     @Autowired
     MasterListItemRepository masterListItemRepository;
 
-    @GetMapping("/admin/admindash")
+    @GetMapping("/admin/viewchains")
     public String viewDashboard(Model model){
         model.addAttribute("chains", chainRepository.findAll());
         model.addAttribute("newChain", new Chain());
-        return "admin/admindash";
+        return "/admin/viewchains";
+    }
+    @GetMapping("/admin/viewstores/{id}")
+    public String viewChain(@PathVariable("id") long id, Model model){
+        model.addAttribute("stores", groceryStoreRepository.findAllByChain_Id(id));
+        model.addAttribute("newStore", new GroceryStore());
+        return "/admin/viewstores";
+    }
+    @GetMapping("/admin/masterlist/{id}")
+    public String viewMasterlist(@PathVariable("id") long id, Model model){
+        return "masterlist";
     }
     @PostMapping("/admin/savechain")
     public String saveChain(@Valid @ModelAttribute("chain") Chain chain, BindingResult result){
         if(result.hasErrors()){
-            return "admin/admindash";
+            return "/admin/viewchains";
         }
         chainRepository.save(chain);
-        return "redirect:/admin/admindash";
+        return "redirect:/admin/viewchains";
     }
-    @GetMapping("admin/viewchain{id}")
-    public String viewChain(@PathVariable("id") long id, Model model){
-        model.addAttribute("chain", chainRepository.findById(id));
-        model.addAttribute("stores", groceryStoreRepository.findAll());
-        model.addAttribute("newStore", new GroceryStore());
-        return "viewchain";
-    }
-    @GetMapping("admin/masterlist{id}")
-    public String viewMasterlist(Model model){
-        return "masterlist";
-    }
+
 
 
 }

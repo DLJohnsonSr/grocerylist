@@ -33,18 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        String[] everyone = {"/", "/css/**","/img/**","/vendor/**","/signup","/saveuser","/login"};
-        String[] user = {everyone.toString()};
-        String[] sM = {user.toString(),"/admin/**"};
-        String[] dM = {sM.toString()};
-        String[] boss = {dM.toString()};
+        String[] everyone = {"/", "/css/**","/img/**","/vendor/**","/fragment/**","/signup","/saveuser","/login"};
+        String[] store = {};
+        String[] corporate = {"/h2-console","/admin/**"};
 
         http.authorizeRequests()
                 .antMatchers(everyone).permitAll()
-                .antMatchers(user).access("hasAuthority('USER')")
-                .antMatchers(sM).access("hasAuthority('SM')")
-                .antMatchers(dM).access("hasAuthority('DM')")
-                .antMatchers(boss).access("hasAuthority('BOSS')")
+                .antMatchers().authenticated()
+                .antMatchers().access("hasAuthority('SM') and hasAuthority('DM') and hasAuthority('BOSS')")
+                .antMatchers(corporate).access("hasAuthority('DM') and hasAuthority('BOSS')")
+                .antMatchers().access("hasAuthority('BOSS')")
                 .anyRequest().authenticated()
                 .and()
 //                .formLogin().permitAll()

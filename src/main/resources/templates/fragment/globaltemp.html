@@ -41,7 +41,10 @@
                     <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li sec:authorize="hasAuthority('DM')" class="nav-item">
-                    <a class="nav-link" href="/admin/admindash">ADMIN Dashboard</a>
+                    <a class="nav-link" href="/admin/viewchains">Corporate Dashboard</a>
+                </li>
+                <li sec:authorize="hasAuthority('SM')" class="nav-item">
+                    <a class="nav-link" href="/admin/viewchains">Store Manager Dashboard</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>

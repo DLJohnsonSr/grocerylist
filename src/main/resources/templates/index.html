@@ -1,55 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head th:replace="/fragment/globaltemp::head"></head>
 
-  <head th:fragment="head">
+<body>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>DollarSaved Grocery List App</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/full.css" rel="stylesheet">
-
-  </head>
-
-  <body>
-
-  <!-- Navigation -->
-  <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">DollarSaved</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li sec:authorize="isAnonymous()" class="nav-item">
-            <a class="nav-link" href="/signup">Sign Up</a>
-          </li>
-          <li sec:authorize="isAnonymous()" class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
-            <a class="nav-link" href="/admin/admindash">ADMIN Dashboard</a>
-          </li>
-          <li sec:authorize="isAuthenticated()" class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<!-- Navigation -->
+<nav th:replace="/fragment/globaltemp::nav"></nav>
 
   <!-- Page Content Starts-->
   <!-- Page Content -->
@@ -184,20 +140,12 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer th:fragment="footer" class="py-5 bg-dark">
-      <div class="container">
-          <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
-  </footer>
-  <!-- Page Content Ends-->
+<footer th:replace="/fragment/globaltemp::footer"></footer>
+<!-- Page Content Ends-->
 
-    <!-- Bootstrap core JavaScript -->
-  <div th:fragment="scripts">
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  </div>
+<!-- Bootstrap core JavaScript -->
+<div th:replace="/fragment/globaltemp::scripts"></div>
 
-  </body>
+</body>
 
 </html>

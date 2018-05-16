@@ -12,12 +12,12 @@ body {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-    padding-top: 54px;
+    padding-top: 64px;
 }
 
 @media (min-width: 992px) {
     body {
-        padding-top: 56px;
+        padding-top: 66px;
     }
 }
 

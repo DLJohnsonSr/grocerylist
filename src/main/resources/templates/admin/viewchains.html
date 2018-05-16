@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head th:replace="/fragment/globaltemp::head"></head>
 
-<head th:replace="/fragment/globaltemp::head">
+<body>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>DollarSaved Grocery List App</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/full.css" rel="stylesheet">
-
-</head>
+<!-- Navigation -->
+<nav th:replace="/fragment/globaltemp::nav"></nav>
 
 <body>
 
@@ -38,7 +27,7 @@
                     <tr>
                         <th scope="col">Chain Name</th>
                         <th scope="col"># of Stores</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,8 +35,8 @@
                         <td th:text="${eachChain.chainName}"></td>
                         <td></td>
                         <td>
-                            <a href="/admin/viewchain{id}(id=${eachChain.id})}">Details</a><br>
-                            <a href="/admin/masterlist{id}(id=${eachChain.id})}">View Master Product List</a>
+                            <a th:href="@{/admin/viewstores/{id}(id=${eachChain.id})}">Details</a><br>
+                            <a th:href="@{/admin/masterlist/{id}(id=${eachChain.id})}">View Master Product List</a>
                         </td>
                     </tr>
                 </tbody>
@@ -71,13 +60,13 @@
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
 
-            <!-- Add Chain Widget -->
+            <!-- Add ChainDataLoader Widget -->
             <div th:fragment="chain" class="card my-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
                     <form th:action="@{/admin/savechain}" th:object="${newChain}" method="post" class="input-group">
                         <input type="hidden" th:field="*{id}">
-                        <input type="text" class="form-control" placeholder="Add Name of Chain">
+                        <input type="text" th:field="*{chainName}" class="form-control" placeholder="Add Name of Chain">
                         <span class="input-group-btn">
                             <button class="btn btn-secondary" type="submit">Save</button>
                         </span>
@@ -118,13 +107,12 @@
 <!-- /.container -->
 <!-- Page Content Ends-->
 
-
+<!-- Footer -->
+<footer th:replace="/fragment/globaltemp::footer"></footer>
+<!-- Page Content Ends-->
 
 <!-- Bootstrap core JavaScript -->
-<div th:replace="/fragment/globaltemp::scripts">
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</div>
+<div th:replace="/fragment/globaltemp::scripts"></div>
 
 </body>
 

@@ -11,14 +11,20 @@ public class Chain {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String chainName;
-    @OneToMany
-    @JoinColumn
+
+    @OneToMany(mappedBy = "chain")
     private Set<GroceryStore> groceryStores;
+
     @OneToOne
     @JoinColumn
     private MasterList masterList;
 
     public Chain() {
+        this.chainName = chainName;
+        this.groceryStores = new HashSet<>();
+    }
+
+    public Chain(String chainName) {
         this.chainName = chainName;
         this.groceryStores = new HashSet<>();
     }
@@ -57,5 +63,9 @@ public class Chain {
 
     public void addStores(GroceryStore groceryStore){
         this.groceryStores.add(groceryStore);
+    }
+
+    public void findNumberStores(){
+
     }
 }

@@ -9,13 +9,20 @@ public class GroceryStore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String storeName;
     private String address;
     private String city;
     private String state;
     private String zipCode;
+
+    @ManyToOne
+    @JoinColumn
+    private Chain chain;
+
     @ManyToMany(mappedBy = "customerGroceryStores")
     private Set<AppUser>storeCustomers;
+
     @OneToOne
     @JoinColumn
     private GroceryStoreList groceryStoreList;
@@ -26,7 +33,26 @@ public class GroceryStore {
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+        this.chain = chain;
         this.storeCustomers = new HashSet();
+    }
+
+    public GroceryStore(String storeName, String address, String city, String state, String zipCode,Chain chain) {
+        this.storeName = storeName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.chain = chain;
+        this.storeCustomers = new HashSet();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getStoreName() {
@@ -67,6 +93,14 @@ public class GroceryStore {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public Chain getChain() {
+        return chain;
+    }
+
+    public void setChain(Chain chain) {
+        this.chain = chain;
     }
 
     public Set<AppUser> getStoreCustomers() {

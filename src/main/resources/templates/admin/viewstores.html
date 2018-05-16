@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head th:replace="/fragment/globaltemp::head"></head>
+
+<body>
+
+<!-- Navigation -->
+<nav th:replace="/fragment/globaltemp::nav"></nav>
+
+<!-- Page Content Starts-->
+<!-- Page Content -->
+<div class="container main-section">
+
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h1 class="mt-4">Chain List</h1>
+
+            <table class="table table-striped table-bordered table-hover">
+                <thead >
+                <tr>
+                    <th scope="col">Store Location</th>
+                    <th scope="col">Manager</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody >
+                    <tr th:each="eachStore:${stores}">
+                        <td th:inline="text">[[${eachStore.storeName}]]: [[${eachStore.address}]], [[${eachStore.city}]], [[${eachStore.state}]] [[${eachStore.zipCode}]]</td>
+                        <td></td>
+                        <td>
+                            <!--<a href="/admin/viewchain{id}(id=${eachChain.id})}">Details</a><br>-->
+                            <!--<a href="/admin/masterlist{id}(id=${eachChain.id})}">View Master Product List</a>-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Add ChainDataLoader Widget -->
+            <div th:fragment="chain" class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <form th:action="@{/admin/savestore}" th:object="${newStore}" method="post" class="input-group">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="text" th:field="*{storeName}" class="form-control" placeholder="Add Name of Store">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="submit">Save</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Grocery Chains</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">Web Design</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Side Widget</h5>
+                <div class="card-body">
+                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+<!-- Page Content Ends-->
+
+<!-- Footer -->
+<footer th:replace="/fragment/globaltemp::footer"></footer>
+<!-- Page Content Ends-->
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="/fragment/globaltemp::scripts"></div>
+
+</body>
+
+</html>
